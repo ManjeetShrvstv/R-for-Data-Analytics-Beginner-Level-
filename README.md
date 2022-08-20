@@ -5,7 +5,7 @@ R is the most widely used statistics programming language and is the #1 choice o
 ---
 title: "R Programming- Beginner Level"
 author: "Manjeet Shtivastav"
-date: "`r Sys.Date()`"
+date: "August 20, 2022"
 output: html_document
 ---
 
