@@ -1,2 +1,366 @@
 # R-for-Data-Analytics-Beginner-Level-
 R is the most widely used statistics programming language and is the #1 choice of data scientists and analysts. During this course we will learn the basics of R, see how to create programs that store &amp; manipulate data, as well as perform data analysis tasks using various data sets and visualize the results using graphs and charts.
+
+
+---
+title: "R Programming- Beginner Level"
+author: "Manjeet Shtivastav"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+## Example of varibles:
+
+Generally, every R program deals with data. Variables allow you to store and manipulate data. Variables have a name and a value.
+
+```{r}
+var1 <- "Hello, world!"
+print(var1)
+```
+
+## Data types :
+
+Variables can store different types of data, such as integers, decimals, text. In R, you do not need to specify the type a variable will hold. Instead, R will automatically get the type from the value it is assigned to.
+
+```{r}
+var1 <- "R programming"
+class(var1)
+
+var2 <- 2022L
+class(var2)
+
+var3 <- 3.14
+class(var3)
+
+var4 <- TRUE
+class(var4)
+
+var5 <- 6+3i
+class(var5)
+
+```
+
+## Problem Exercise 01:
+
+### Strings
+
+You are making a quote generator app and need to output a famous quote. Write a program to output the following: "Everything you can imagine is real." - Picasso
+
+```{r}
+quote <- ("\"Everything you can imagine is real.\" - Picasso")
+cat(quote)
+```
+
+## Operators in R :
+
+```{r}
+x <- 11
+y <- 4
+print(x+y)
+
+print(x-y)
+
+print(x*y)
+
+print(x/y)
+
+print(x^y) #or x**y
+
+print(x%%y)
+
+print(x%/%y) 
+```
+
+## Taking Input
+
+R allows you to take user input and store them in a variable. The readLines function is used to read every line given as separate inputs, making it a convenient way to read multiple inputs. For example:
+
+```{r}
+input <- readLines('stdin') 
+```
+
+Now, input is a variable that holds every line of the given input separately. Note the 'stdin' parameter - it is needed to read the standard input. In order to access the inputs, we need to provide the number of the line we want to access using square brackets:
+
+```{r}
+input <- readLines('stdin')
+print(input[1]) 
+
+```
+
+This will output the first input.
+
+## Logical Operators:
+
+Logical operators allow you to combine multiple conditions. The logical & (AND) operator allows you to combine two conditions and returns TRUE only if both conditions are TRUE.Similarly, the logical \| (OR) operator returns TRUE if any one of its conditions is TRUE.The logical ! (NOT) operator returns the opposite of the given condition.
+
+For example:
+
+```{r}
+x <- 6
+y <- 2
+if(x>y & x < 10) {
+  print("Yes")
+}
+
+x <- 6
+y <- 2
+if(x>y | x > 100) {
+  print("Yes")
+} 
+
+x <- TRUE
+print(!x)  
+```
+
+## Installing and using R packages:
+
+```{r}
+install.packages("palmerpenguins") library("palmerpenguins") summary(penguins) View(penguins)
+
+```
+
+## Exploring toothgrowth dataset:
+
+```{r}
+data("ToothGrowth") View(ToothGrowth)
+
+```
+
+### Installing deplyr package:
+
+```{r}
+install.packages("dplyr") 
+library(dplyr)
+
+```
+
+## Filtering data set where dose is 0.5:
+
+```{r}
+filtered_tg <- filter(ToothGrowth, dose == 0.5) View(filtered_tg)
+
+```
+
+### arrange the dataset by len:
+
+arrange(filtered_tg, len)
+
+## nested function:
+
+```{r}
+arrange(filter(ToothGrowth, dose == 0.5),len)
+
+```
+
+## Use of pipe function:
+
+```{r}
+filtered_toothgrowth <- ToothGrowth %>% filter(dose==0.5) %>% arrange(len) View(filtered_toothgrowth)
+
+```
+
+### Installing and using tidyverse package:
+
+```{r}
+install.packages("tidyverse") 
+library(ggplot2) 
+
+```
+
+### Using diamonds dataset:
+
+```{r}
+data("diamonds")
+View(diamonds)
+
+head(diamonds)
+colnames(diamonds)
+
+```
+
+## Use of mutate function:
+
+```{r}
+library(tidyverse)
+mutate(diamonds, carat_2=carat*100)
+
+```
+
+## Use of tibble:
+
+Tibbles are like streamlined data frames that are automatically- set to pull up only the first 10 rows of a dataset, and only as many columns as can fit on the screen.
+
+```{r}
+library(tidyverse)
+data("diamonds") 
+as_tibble(diamonds)
+
+```
+
+## DATA CLEANING:
+
+### sorting and filtering:
+
+```{r}
+install.packages("tidyverse") 
+
+library(tidyverse)
+
+penguins %>% arrange(bill_length_mm) penguins2 <- penguins %>% arrange(bill_length_mm) View(penguins2) 
+
+##use of summarize function:
+penguins %>% group_by(island) %>% drop_na() %>% summarise(mean_bill_length_mm = mean(bill_length_mm))
+
+penguins %>% group_by(island) %>% drop_na() %>% summarise(max_bill_length_mm= max(bill_length_mm))
+
+penguins %>% group_by(species, island) %>% drop_na() %>% summarise(max_bl=max(bill_length_mm), mean_bl= mean(bill_length_mm)) penguins %>% filter(species== "Adelie")
+
+install.packages("tidyverse")
+library(tidyverse)
+
+penguins %\>% arrange(bill_length_mm)
+
+penguins2 <- penguins %\>% arrange(bill_length_mm) View(penguins2)
+
+```
+
+## Use of summarize function:
+
+```{r}
+penguins %>% group_by(island) %>% drop_na() %>% summarise(mean_bill_length_mm = mean(bill_length_mm))
+
+penguins %>% group_by(island) %>% drop_na() %>% summarise(max_bill_length_mm= max(bill_length_mm))
+
+penguins %\>% group_by(species, island) %\>% drop_na() %\>% summarise(max_bl=max(bill_length_mm), mean_bl= mean(bill_length_mm))
+
+penguins %\>% filter(species== "Adelie")
+
+```
+
+## TRANSFORMING DATA:
+
+### creating a dataframe:
+
+```{r}
+id <- c(1:10) 
+
+name <- c("Ram Sharma","Shyam Verma","Mohan Kumar","Sohan Verma","Karan Sharma","Golu Shrivastav","Molu Shrivastav","Lolu Sharma","Raja Verma","Rani Verma" )
+
+job_title <- c("Professional","Developer","Engineer","Worker","Clerk","Painter","Developer","Worker","Engineer","Painter") employee <- data.frame(id, name, job_title)
+
+print(employee) #using seperate: separate(employee, name, into = c('firstName','lastName', sep=' '))
+
+```
+
+## UNITE:
+
+### unite function does the opposite of separate:
+
+```{r}
+unite(employee, 'name', firstName, lastName, sep = ' ')
+
+```
+
+## Mutate function:
+
+```{r}
+library(palmerpenguins)
+View(penguins)
+
+penguins %>% mutate(body_mass_kg= body_mass_g/1000, flipper_length_m= flipper_length_mm/1000)
+
+install.packages("Tmisc")
+library(Tmisc)
+
+data("quartet")
+View(quartet)
+
+quartet %>% group_by(set) %>% summarise(mean(x), sd(x), mean(y), sd(y), cor(x,y))
+
+```
+
+## Visualization in R:
+
+### Getting started with ggplot:
+
+```{r}
+library(ggplot2)
+library(palmerpenguins)
+
+```
+
+## Different aes functions:(x,y, shape, color, size, alpha)
+
+```{r}
+ ggplot(data = penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, color= species)) ggplot(data = penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, shape= species)) ggplot(data = penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, alpha= species)) ggplot(data = penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g), color= "Blue")
+
+```
+
+## Different geom functions:
+
+```{r}
+ggplot(data = penguins)+ geom_smooth(mapping = aes(x=flipper_length_mm, y=body_mass_g))+ geom_jitter(mapping = aes(x=flipper_length_mm,y=body_mass_g))
+
+```
+
+### Using geom_bar() function in diamonds datset:
+
+```{r}
+View(diamonds)
+ggplot(data = diamonds)+ geom_bar(mapping = aes(x=cut, fill= cut))
+
+ggplot(data = diamonds)+ geom_bar(mapping = aes(x=cut, fill= clarity))
+
+```
+
+## Facet functions:
+
+```{r}
+ggplot(data= penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, color= species))+ facet_wrap(~species)
+
+### with diamonds dataset:
+
+ggplot(data=diamonds)+ geom_bar(mapping = aes(x=color, fill=cut))+ facet_wrap(\~cut)
+
+### facet_grid():
+
+ggplot(data= penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, color= species))+ facet_grid(sex~species)
+
+```
+
+## Annoatations:
+
+```{r}
+ggplot(data=penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, color= species))+ labs(title = "Palmer Penguins: Body mass vs. Flipper lenght", subtitle = "Sample of 3 species" )+ annotate('text', x=220,y=3500, label= "Gentoos are largest", color= "blue", fontface = "bold", size= 4.5, angle=25)
+
+```
+
+### Assigning to variable:
+
+```{r}
+p <- ggplot(data=penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, color= species))+ labs(title = "Palmer Penguins: Body mass vs. Flipper lenght", subtitle = "Sample of 3 species" )
+
+p+ annotate('text', x=220,y=3500, label= "Gentoos are largest", color= "blue", fontface = "bold", size= 4.5)
+
+p+ labs(caption = "Designed by Manjeet Shrivastav")
+
+```
+
+## Saving visualization:
+
+```{r}
+ggsave("Three_Species_sample.png")
+
+```
+
+## Thank You!
