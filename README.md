@@ -223,7 +223,8 @@ penguins %>% group_by(island) %>% drop_na() %>% summarise(mean_bill_length_mm = 
 
 penguins %>% group_by(island) %>% drop_na() %>% summarise(max_bill_length_mm= max(bill_length_mm))
 
-penguins %>% group_by(species, island) %>% drop_na() %>% summarise(max_bl=max(bill_length_mm), mean_bl= mean(bill_length_mm)) penguins %>% filter(species== "Adelie")
+penguins %>% group_by(species, island) %>% drop_na() %>% summarise(max_bl=max(bill_length_mm), mean_bl= mean(bill_length_mm)) 
+penguins %>% filter(species== "Adelie")
 
 install.packages("tidyverse")
 library(tidyverse)
@@ -302,7 +303,13 @@ library(palmerpenguins)
 ## Different aes functions:(x,y, shape, color, size, alpha)
 
 ```{r}
- ggplot(data = penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, color= species)) ggplot(data = penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, shape= species)) ggplot(data = penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, alpha= species)) ggplot(data = penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g), color= "Blue")
+ ggplot(data = penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, color= species)) 
+ 
+ ggplot(data = penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, shape= species)) 
+ 
+ ggplot(data = penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g, alpha= species)) 
+ 
+ ggplot(data = penguins)+ geom_point(mapping = aes(x=flipper_length_mm, y=body_mass_g), color= "Blue")
 
 ```
 
